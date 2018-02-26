@@ -28,6 +28,8 @@ import org.eclipse.swt.dnd.FileTransfer;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.ShellAdapter;
+import org.eclipse.swt.events.ShellEvent;
 import org.eclipse.swt.events.ShellListener;
 import org.eclipse.swt.events.TreeAdapter;
 import org.eclipse.swt.events.TreeEvent;
@@ -1737,7 +1739,13 @@ public class FileViewer {
 			GridLayout gridLayout = new GridLayout();
 			shell.setLayout(gridLayout);
 			shell.setText(getResourceString("progressDialog." + operationKeyName[style] + ".title"));
-			shell.addShellListener(ShellListener.shellClosedAdapter(e -> isCancelled = true));
+			shell.addShellListener(new ShellAdapter() {
+			    @Override
+			    public void shellClosed(ShellEvent arg0) {
+			        isCancelled = true;
+			    }
+            });
+			//shell.addShellListener(ShellListener.shellClosedAdapter(e -> isCancelled = true));
 
 			messageLabel = new Label(shell, SWT.HORIZONTAL);
 			messageLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_FILL));

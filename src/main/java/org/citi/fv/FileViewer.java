@@ -30,7 +30,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
-import org.eclipse.swt.events.ShellListener;
 import org.eclipse.swt.events.TreeAdapter;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.graphics.Image;
@@ -60,8 +59,8 @@ import org.eclipse.swt.widgets.TreeItem;
 public class FileViewer {
 	private static ResourceBundle resourceBundle = ResourceBundle.getBundle("examples_fileviewer");
 
-	private final static String DRIVE_A = "a:" + File.separator;
-	private final static String DRIVE_B = "b:" + File.separator;
+	private static final String DRIVE_A = "a:" + File.separator;
+	private static final String DRIVE_B = "b:" + File.separator;
 
 	/* UI elements */
 	private Display display;
@@ -1714,9 +1713,9 @@ public class FileViewer {
 	 * Instances of this class manage a progress dialog for file operations.
 	 */
 	class ProgressDialog {
-		public final static int COPY = 0;
-		public final static int DELETE = 1;
-		public final static int MOVE = 2;
+		public static final int COPY = 0;
+		public static final int DELETE = 1;
+		public static final int MOVE = 2;
 
 		Shell shell;
 		Label messageLabel, detailLabel;

@@ -1,4 +1,4 @@
-package org.citi.fv;
+package org.citi.fileview;
 
 import static org.eclipse.swt.events.SelectionListener.widgetSelectedAdapter;
 
@@ -30,6 +30,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
+//import org.eclipse.swt.events.ShellListener;
 import org.eclipse.swt.events.TreeAdapter;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.graphics.Image;
@@ -55,6 +56,7 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class FileViewer {
 	private static ResourceBundle resourceBundle = ResourceBundle.getBundle("examples_fileviewer");
@@ -155,6 +157,7 @@ public class FileViewer {
 		this.display = display;
 		iconCache.initResources(display);
 		shell = new Shell();
+		shell.setSize(619, 300);
 		createShellContents();
 		notifyRefreshFiles(null);
 		shell.open();
@@ -205,7 +208,7 @@ public class FileViewer {
 	 */
 	private void createShellContents() {
 		shell.setText(getResourceString("Title", new Object[] { "" }));
-		shell.setImage(iconCache.stockImages[iconCache.shellIcon]);
+		shell.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/generic_example.gif"));
 		Menu bar = new Menu(shell, SWT.BAR);
 		shell.setMenuBar(bar);
 		createFileMenu(bar);
@@ -301,11 +304,11 @@ public class FileViewer {
 		toolBar.setLayoutData(layoutData);
 		ToolItem item = new ToolItem(toolBar, SWT.SEPARATOR);
 		item = new ToolItem(toolBar, SWT.PUSH);
-		item.setImage(iconCache.stockImages[iconCache.cmdParent]);
+		item.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/cmd_Parent.gif"));
 		item.setToolTipText(getResourceString("tool.Parent.tiptext"));
 		item.addSelectionListener(widgetSelectedAdapter(e -> doParent()));
 		item = new ToolItem(toolBar, SWT.PUSH);
-		item.setImage(iconCache.stockImages[iconCache.cmdRefresh]);
+		item.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/cmd_Refresh.gif"));
 		item.setToolTipText(getResourceString("tool.Refresh.tiptext"));
 		item.addSelectionListener(widgetSelectedAdapter(e -> doRefresh()));
 		SelectionListener unimplementedListener = widgetSelectedAdapter(e -> {
@@ -317,35 +320,35 @@ public class FileViewer {
 
 		item = new ToolItem(toolBar, SWT.SEPARATOR);
 		item = new ToolItem(toolBar, SWT.PUSH);
-		item.setImage(iconCache.stockImages[iconCache.cmdCut]);
+		item.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/cmd_Cut.gif"));
 		item.setToolTipText(getResourceString("tool.Cut.tiptext"));
 		item.addSelectionListener(unimplementedListener);
 		item = new ToolItem(toolBar, SWT.PUSH);
-		item.setImage(iconCache.stockImages[iconCache.cmdCopy]);
+		item.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/cmd_Copy.gif"));
 		item.setToolTipText(getResourceString("tool.Copy.tiptext"));
 		item.addSelectionListener(unimplementedListener);
 		item = new ToolItem(toolBar, SWT.PUSH);
-		item.setImage(iconCache.stockImages[iconCache.cmdPaste]);
+		item.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/cmd_Paste.gif"));
 		item.setToolTipText(getResourceString("tool.Paste.tiptext"));
 		item.addSelectionListener(unimplementedListener);
 
 		item = new ToolItem(toolBar, SWT.SEPARATOR);
 		item = new ToolItem(toolBar, SWT.PUSH);
-		item.setImage(iconCache.stockImages[iconCache.cmdDelete]);
+		item.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/cmd_Delete.gif"));
 		item.setToolTipText(getResourceString("tool.Delete.tiptext"));
 		item.addSelectionListener(unimplementedListener);
 		item = new ToolItem(toolBar, SWT.PUSH);
-		item.setImage(iconCache.stockImages[iconCache.cmdRename]);
+		item.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/cmd_Rename.gif"));
 		item.setToolTipText(getResourceString("tool.Rename.tiptext"));
 		item.addSelectionListener(unimplementedListener);
 
 		item = new ToolItem(toolBar, SWT.SEPARATOR);
 		item = new ToolItem(toolBar, SWT.PUSH);
-		item.setImage(iconCache.stockImages[iconCache.cmdSearch]);
+		item.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/cmd_Search.gif"));
 		item.setToolTipText(getResourceString("tool.Search.tiptext"));
 		item.addSelectionListener(unimplementedListener);
 		item = new ToolItem(toolBar, SWT.PUSH);
-		item.setImage(iconCache.stockImages[iconCache.cmdPrint]);
+		item.setImage(SWTResourceManager.getImage(FileViewer.class, "/org/citi/fv/cmd_Print.gif"));
 		item.setToolTipText(getResourceString("tool.Print.tiptext"));
 		item.addSelectionListener(unimplementedListener);
 	}
@@ -1744,7 +1747,7 @@ public class FileViewer {
 			        isCancelled = true;
 			    }
             });
-			//shell.addShellListener(ShellListener.shellClosedAdapter(e -> isCancelled = true));
+			//shell.addShellListener(new ShellClosed);
 
 			messageLabel = new Label(shell, SWT.HORIZONTAL);
 			messageLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_FILL));
